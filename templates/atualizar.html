@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Atualizar Usuário</h2>
+    <form method="POST">
+        <label for="nome_completo">Nome Completo:</label>
+        <input type="text" id="nome_completo" name="nome_completo" value="{{ usuario.nome_completo }}" required>
+
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" value="{{ usuario.data_nascimento }}" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" value="{{ usuario.endereco }}" required>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" value="{{ usuario.cpf }}" required>
+
+        <label for="estado_civil">Estado Civil:</label>
+        <select id="estado_civil" name="estado_civil">
+            <option value="solteiro" {% if usuario.estado_civil == 'solteiro' %} selected {% endif %}>Solteiro</option>
+            <option value="casado" {% if usuario.estado_civil == 'casado' %} selected {% endif %}>Casado</option>
+            <option value="divorciado" {% if usuario.estado_civil == 'divorciado' %} selected {% endif %}>Divorciado</option>
+            <option value="viuvo" {% if usuario.estado_civil == 'viuvo' %} selected {% endif %}>Viúvo</option>
+            <option value="outro" {% if usuario.estado_civil == 'outro' %} selected {% endif %}>Outro</option>
+        </select>
+
+        <input type="submit" value="Atualizar">
+    </form>
+</body>
+</html>

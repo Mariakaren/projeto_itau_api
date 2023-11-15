@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        a:hover {
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .action-cell {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista de Usuários Cadastrados</h2>
+    <table>
+        <tr>
+            <th>Nome Completo</th>
+            <th>Data de Nascimento</th>
+            <th>Endereço</th>
+            <th>CPF</th>
+            <th>Estado Civil</th>
+            <th class="action-cell">Ações</th>
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.nome_completo }}</td>
+            <td>{{ usuario.data_nascimento }}</td>
+            <td>{{ usuario.endereco }}</td>
+            <td>{{ usuario.cpf }}</td>
+            <td>{{ usuario.estado_civil }}</td>
+            <td class="action-cell">
+                <a href="/excluir/{{ usuario.id }}">Excluir</a>
+                <a href="/atualizar/{{ usuario.id }}">Atualizar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
