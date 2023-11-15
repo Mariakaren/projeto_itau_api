@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 usuarios = []
-user_id = 1  # Initialize user_id to 1
+user_id = 1
 class Pessoa:
     def __init__(self, id, nome_completo, data_nascimento, endereco, cpf, estado_civil):
         self.id = id
@@ -26,9 +26,8 @@ def cadastro():
         cpf = request.form['cpf']
         estado_civil = request.form['estado_civil']
 
-        # Create an instance of Pessoa with a unique ID
         usuario = Pessoa(user_id, nome_completo, data_nascimento, endereco, cpf, estado_civil)
-        user_id += 1  # Increment user_id
+        user_id += 1 
         usuarios.append(usuario)
 
     return render_template('template.html')
@@ -36,14 +35,13 @@ def cadastro():
 @app.route('/atualizar/<int:user_id>', methods=['GET', 'POST'])
 def atualizar_usuario(user_id):
     if request.method == 'POST':
-        # Update user information based on the form data
+        
         nome_completo = request.form['nome_completo']
         data_nascimento = request.form['data_nascimento']
         endereco = request.form['endereco']
         cpf = request.form['cpf']
         estado_civil = request.form['estado_civil']
 
-        # Find the user by ID and update their information
         for usuario in usuarios:
             if usuario.id == user_id:
                 usuario.nome_completo = nome_completo
@@ -64,7 +62,7 @@ def atualizar_usuario(user_id):
 
 @app.route('/excluir/<int:user_id>', methods=['GET'])
 def excluir_usuario(user_id):
-    global usuarios  # Make sure you reference the global 'usuarios' list
+    global usuarios  
     usuarios = [usuario for usuario in usuarios if usuario.id != user_id]
     return redirect(url_for('lista_usuarios'))
 
@@ -73,6 +71,5 @@ def excluir_usuario(user_id):
 def lista_usuarios():
     return render_template('lista.html', usuarios=usuarios)
 
-# Executar a aplicação
 if __name__ == "__main__":
     app.run(debug=True)
